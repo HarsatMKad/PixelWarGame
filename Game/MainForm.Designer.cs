@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
       this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
       this.label1 = new System.Windows.Forms.Label();
       this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -46,14 +46,14 @@
       this.label8 = new System.Windows.Forms.Label();
       this.label9 = new System.Windows.Forms.Label();
       this.panel2 = new System.Windows.Forms.Panel();
-      this.label10 = new System.Windows.Forms.Label();
-      this.label11 = new System.Windows.Forms.Label();
-      this.label12 = new System.Windows.Forms.Label();
-      this.label13 = new System.Windows.Forms.Label();
-      this.label14 = new System.Windows.Forms.Label();
-      this.label15 = new System.Windows.Forms.Label();
-      this.label16 = new System.Windows.Forms.Label();
       this.label17 = new System.Windows.Forms.Label();
+      this.label16 = new System.Windows.Forms.Label();
+      this.label15 = new System.Windows.Forms.Label();
+      this.label14 = new System.Windows.Forms.Label();
+      this.label13 = new System.Windows.Forms.Label();
+      this.label12 = new System.Windows.Forms.Label();
+      this.label11 = new System.Windows.Forms.Label();
+      this.label10 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
@@ -61,8 +61,8 @@
       // 
       // chart1
       // 
-      chartArea12.Name = "ChartArea1";
-      this.chart1.ChartAreas.Add(chartArea12);
+      chartArea1.Name = "ChartArea1";
+      this.chart1.ChartAreas.Add(chartArea1);
       this.chart1.Location = new System.Drawing.Point(8, 9);
       this.chart1.Name = "chart1";
       this.chart1.Size = new System.Drawing.Size(850, 850);
@@ -216,72 +216,21 @@
       this.panel2.Controls.Add(this.label11);
       this.panel2.Controls.Add(this.label10);
       this.panel2.Controls.Add(this.label9);
-      this.panel2.Location = new System.Drawing.Point(866, 423);
+      this.panel2.Location = new System.Drawing.Point(866, 713);
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(219, 146);
       this.panel2.TabIndex = 14;
       // 
-      // label10
+      // label17
       // 
-      this.label10.AutoSize = true;
-      this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label10.Location = new System.Drawing.Point(159, 4);
-      this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(24, 20);
-      this.label10.TabIndex = 14;
-      this.label10.Text = "W";
-      // 
-      // label11
-      // 
-      this.label11.AutoSize = true;
-      this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label11.Location = new System.Drawing.Point(135, 27);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(20, 20);
-      this.label11.TabIndex = 15;
-      this.label11.Text = "A";
-      // 
-      // label12
-      // 
-      this.label12.AutoSize = true;
-      this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label12.Location = new System.Drawing.Point(159, 27);
-      this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(20, 20);
-      this.label12.TabIndex = 16;
-      this.label12.Text = "S";
-      // 
-      // label13
-      // 
-      this.label13.AutoSize = true;
-      this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label13.Location = new System.Drawing.Point(185, 27);
-      this.label13.Name = "label13";
-      this.label13.Size = new System.Drawing.Size(21, 20);
-      this.label13.TabIndex = 17;
-      this.label13.Text = "D";
-      // 
-      // label14
-      // 
-      this.label14.AutoSize = true;
-      this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label14.Location = new System.Drawing.Point(6, 67);
-      this.label14.Name = "label14";
-      this.label14.Size = new System.Drawing.Size(59, 20);
-      this.label14.TabIndex = 18;
-      this.label14.Text = "Атака:";
-      this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label15
-      // 
-      this.label15.AutoSize = true;
-      this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label15.Location = new System.Drawing.Point(135, 67);
-      this.label15.Name = "label15";
-      this.label15.Size = new System.Drawing.Size(44, 20);
-      this.label15.TabIndex = 19;
-      this.label15.Text = "ЛКМ";
-      this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.label17.AutoSize = true;
+      this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label17.Location = new System.Drawing.Point(135, 108);
+      this.label17.Name = "label17";
+      this.label17.Size = new System.Drawing.Size(36, 20);
+      this.label17.TabIndex = 21;
+      this.label17.Text = "Esc";
+      this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // label16
       // 
@@ -294,16 +243,67 @@
       this.label16.Text = "Выход:";
       this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // label17
+      // label15
       // 
-      this.label17.AutoSize = true;
-      this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.label17.Location = new System.Drawing.Point(135, 108);
-      this.label17.Name = "label17";
-      this.label17.Size = new System.Drawing.Size(36, 20);
-      this.label17.TabIndex = 21;
-      this.label17.Text = "Esc";
-      this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.label15.AutoSize = true;
+      this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label15.Location = new System.Drawing.Point(135, 67);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(44, 20);
+      this.label15.TabIndex = 19;
+      this.label15.Text = "ЛКМ";
+      this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // label14
+      // 
+      this.label14.AutoSize = true;
+      this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label14.Location = new System.Drawing.Point(6, 67);
+      this.label14.Name = "label14";
+      this.label14.Size = new System.Drawing.Size(59, 20);
+      this.label14.TabIndex = 18;
+      this.label14.Text = "Атака:";
+      this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // label13
+      // 
+      this.label13.AutoSize = true;
+      this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label13.Location = new System.Drawing.Point(185, 27);
+      this.label13.Name = "label13";
+      this.label13.Size = new System.Drawing.Size(21, 20);
+      this.label13.TabIndex = 17;
+      this.label13.Text = "D";
+      // 
+      // label12
+      // 
+      this.label12.AutoSize = true;
+      this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label12.Location = new System.Drawing.Point(159, 27);
+      this.label12.Name = "label12";
+      this.label12.Size = new System.Drawing.Size(20, 20);
+      this.label12.TabIndex = 16;
+      this.label12.Text = "S";
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label11.Location = new System.Drawing.Point(135, 27);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(20, 20);
+      this.label11.TabIndex = 15;
+      this.label11.Text = "A";
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.label10.Location = new System.Drawing.Point(159, 4);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(24, 20);
+      this.label10.TabIndex = 14;
+      this.label10.Text = "W";
       // 
       // MainForm
       // 
@@ -321,6 +321,7 @@
       this.KeyPreview = true;
       this.Name = "MainForm";
       this.Text = "Pixel War";
+      this.Load += new System.EventHandler(this.MainForm_Load);
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
       this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
       this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);

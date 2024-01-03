@@ -54,18 +54,20 @@ namespace Game
 
     private void UpdateHPBar(int stepBar)
     {
+      player.CurrentHP += stepBar;
+      label2.Text = player.CurrentHP + "/" + player.MaxHP;
+      progressBar1.Step = stepBar;
+      progressBar1.PerformStep();
+
       if (player.CurrentHP <= 0)
       {
         timer1.Stop();
         timer2.Stop();
         chart1.Series.Clear();
-        MessageBox.Show("Death", "Death");
+        MessageBox.Show("Вы проиграли", "Смерть");
+        this.Dispose();
         return;
       }
-      player.CurrentHP += stepBar;
-      label2.Text = player.CurrentHP + "/" + player.MaxHP;
-      progressBar1.Step = stepBar;
-      progressBar1.PerformStep();
     }
 
     private void UpdateExpBar()
@@ -173,7 +175,6 @@ namespace Game
           }
         }
       }
-      Console.WriteLine((chart1.Series.Count() - 2) + "  " + enemys.Count());
       chart1.Series[1].Points.Clear();
     }
 
@@ -215,6 +216,11 @@ namespace Game
           chart1.Series.Add(enemys[i].series);
         }
       }
+    }
+
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+
     }
 
     private void textBox1_TextChanged(object sender, EventArgs e)
