@@ -183,16 +183,12 @@ namespace Game
           Series atts = player.Attack(e.Location.X, e.Location.Y);
           chart1.Series[1] = atts;
           Update();
-          Thread.Sleep(500);
-
-          Series s = new Series();
+          Thread.Sleep(10);
 
           for (int i = 0; i < enemys.Count; ++i)
           {
             for (int PointIndex = 0; PointIndex < chart1.Series[1].Points.Count; ++PointIndex)
             {
-              s.Points.AddXY(chart1.Series[1].Points[PointIndex].XValue + player.AttackRange, chart1.Series[1].Points[PointIndex].YValues[0] + player.AttackRange);
-
               if (enemys[i].x < chart1.Series[1].Points[PointIndex].XValue + player.AttackRange && enemys[i].x > chart1.Series[1].Points[PointIndex].XValue - player.AttackRange)
               {
                 if (enemys[i].y < chart1.Series[1].Points[PointIndex].YValues[0] + player.AttackRange && enemys[i].y > chart1.Series[1].Points[PointIndex].YValues[0] - player.AttackRange)
@@ -210,7 +206,6 @@ namespace Game
             }
           }
           chart1.Series[1].Points.Clear();
-          chart1.Series.Add(s);
         }
       }
       catch
