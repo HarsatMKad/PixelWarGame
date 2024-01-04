@@ -54,9 +54,9 @@ namespace Game
       series.Points.AddXY(x, y);
       timer = new Timer(Move, null, 500, 1000);
 
-      if(x < PlayerX + 3 && x > PlayerX - 3)
+      if(x < PlayerX + 2 && x > PlayerX - 2)
       {
-        if(y < PlayerY + 3 && y > PlayerY - 3)
+        if(y < PlayerY + 2 && y > PlayerY - 2)
         {
           return false;
         }

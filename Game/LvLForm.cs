@@ -18,6 +18,14 @@ namespace Game
     {
       InitializeComponent();
       this.player = player;
+      if(player.attackColdown <= 2)
+      {
+        button3.Enabled = false;
+      }
+      if (player.AttackRange >= 30)
+      {
+        button4.Enabled = false;
+      }
     }
 
     private void LvLForm_Load(object sender, EventArgs e)
@@ -39,9 +47,9 @@ namespace Game
 
     private void button2_Click(object sender, EventArgs e)
     {
-      if(player.CurrentHP > 90)
+      if(player.CurrentHP > player.MaxHP - 10)
       {
-        player.CurrentHP = 100;
+        player.CurrentHP = player.MaxHP;
       }
       else
       {
@@ -52,7 +60,19 @@ namespace Game
 
     private void button3_Click(object sender, EventArgs e)
     {
+      player.attackColdown -= 0.5F;
+      CloseMethod();
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
       player.AttackRange += 2;
+      CloseMethod();
+    }
+
+    private void button5_Click(object sender, EventArgs e)
+    {
+      player.MaxHP += 20;
       CloseMethod();
     }
   }

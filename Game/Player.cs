@@ -10,18 +10,41 @@ namespace Game
 {
   public class Player
   {
-    public int MaxHP = 100;
-    public int CurrentHP = 100;
-    public int dmg = 5;
+    bool r = false;
+    public int MaxHP;
+    public int CurrentHP;
+    public int dmg;
     public int LvL = 0;
     public int Experience = 0;
     public int x = 100, y = 100;
-    public float AttackRange = 10;
+    public int AttackRange;
+    public float attackColdown;
     public Series AttackSeries;
+
+    public Player(bool Range)
+    {
+      if (Range)
+      {
+        r = Range;
+        MaxHP = 70;
+        CurrentHP = 70;
+        dmg = 8;
+        AttackRange = 5;
+        attackColdown = 10;
+      }
+      else
+      {
+        MaxHP = 100;
+        CurrentHP = 100;
+        dmg = 12;
+        AttackRange = 10;
+        attackColdown = 20;
+      }
+    }
 
     public Series Attack(int MouseX, int MouseY)
     {
-      AttackThread mt = new AttackThread(AttackRange, x, y, MouseX, MouseY);
+      AttackThread mt = new AttackThread(AttackRange, x, y, MouseX, MouseY, r);
       AttackSeries = mt.getSeries();
       return AttackSeries;
     }

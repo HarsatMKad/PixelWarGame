@@ -19,18 +19,25 @@ namespace Game
     int MinXMap = 0, MinYMap = 0;
     int timer = 0;
     int Kills = 0;
+    float attackTime = 0;
     List<Enemy> enemys = new List<Enemy>();
-    Player player = new Player();
-    public MainForm()
+    Player player;
+    public MainForm(bool СlassFlag)
     {
       InitializeComponent();
+      this.DoubleBuffered = true;
       chart1.ChartAreas[0].AxisX.Maximum = MaxXMap;
       chart1.ChartAreas[0].AxisX.Minimum = MinXMap;
+      chart1.ChartAreas[0].AxisX2.Minimum = MinXMap;
       chart1.ChartAreas[0].AxisY.Maximum = MaxYMap;
       chart1.ChartAreas[0].AxisY.Minimum = MinYMap;
+      chart1.ChartAreas[0].AxisY2.Minimum = MinXMap;
       chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
       chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+      player = new Player(СlassFlag);
       label3.Text = player.dmg.ToString();
+      label2.Text = player.CurrentHP + "/" + player.MaxHP;
+      label19.Text = player.attackColdown.ToString();
       startPlay();
     }
 
@@ -44,6 +51,8 @@ namespace Game
       PlayerSeries.ChartType = SeriesChartType.Point;
       PlayerSeries.Color = Color.Blue;
       PlayerSeries.Points.AddXY(player.x, player.y);
+      PlayerSeries.Points[0].MarkerSize = 10;
+      PlayerSeries.Points[0].MarkerStyle = MarkerStyle.Circle;
 
       Series PlayerAttackSeries = new Series();
       PlayerAttackSeries.ChartType = SeriesChartType.Bubble;
@@ -56,14 +65,24 @@ namespace Game
     {
       player.CurrentHP += stepBar;
       label2.Text = player.CurrentHP + "/" + player.MaxHP;
-      progressBar1.Step = stepBar;
+      progressBar1.Value = 0;
+      progressBar1.Maximum = player.MaxHP;
+      progressBar1.Step = player.CurrentHP;
       progressBar1.PerformStep();
+
+      if(player.CurrentHP < 40)
+      {
+        progressBar1.ForeColor = Color.DarkRed;
+      }
+      else
+      {
+        progressBar1.ForeColor = Color.LimeGreen;
+      }
 
       if (player.CurrentHP <= 0)
       {
         timer1.Stop();
         timer2.Stop();
-        chart1.Series.Clear();
         MessageBox.Show("Вы проиграли", "Смерть");
         this.Dispose();
         return;
@@ -87,16 +106,17 @@ namespace Game
         timer2.Stop();
         Thread.Sleep(100);
         int chp = player.CurrentHP;
+        int cmhp = player.MaxHP;
         LvLForm lvlForm = new LvLForm(player);
         if(lvlForm.ShowDialog() == DialogResult.OK)
         {
           player = lvlForm.player;
-          Console.WriteLine(chp + "  " + player.CurrentHP);
-          if (chp < player.CurrentHP)
+          if (chp < player.CurrentHP || cmhp < player.MaxHP)
           {
             UpdateHPBar(0);
           }
           label3.Text = player.dmg.ToString();
+          label19.Text = player.attackColdown.ToString();
           timer1.Start();
           timer2.Start();
         }
@@ -105,7 +125,7 @@ namespace Game
 
     private void createEnemy()
     {
-      Enemy enemy = new Enemy(10 + 10 * timer/10, 10 + 10 * timer/10, MaxXMap, MaxYMap); //хп врагов, урон врагов
+      Enemy enemy = new Enemy(10 + 5 * timer/10, 10 + 5 * timer/10, MaxXMap, MaxYMap); //хп врагов, урон врагов
       enemy.UpdateSeries();
       enemys.Add(enemy);
       chart1.Series.Add(enemy.series);
@@ -115,16 +135,18 @@ namespace Game
     {
       if (chart1.Series.Count > 0)
       {
-          player.Move(e.KeyCode, 1, MaxXMap, MaxYMap, MinXMap, MinYMap);
-          chart1.Series[0].Points.Clear();
-          chart1.Series[0].Points.AddXY(player.x, player.y);
-          Update();
+        player.Move(e.KeyCode, 1, MaxXMap, MaxYMap, MinXMap, MinYMap);
+        chart1.Series[0].Points.Clear();
+        chart1.Series[0].Points.AddXY(player.x, player.y);
+        chart1.Series[0].Points[0].MarkerSize = 10;
+        chart1.Series[0].Points[0].MarkerStyle = MarkerStyle.Circle;
+        Update();
       }
       if(e.KeyCode == Keys.Escape)
       {
         timer1.Stop();
         timer2.Stop();
-        if(MessageBox.Show("Выйти ?", "Menu",
+        if(MessageBox.Show("Выйти ?", "Меню",
           MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes){
           this.Close();
         }
@@ -153,29 +175,48 @@ namespace Game
 
     private void chart1_MouseClick(object sender, MouseEventArgs e)
     {
-      Series atts = player.Attack(e.Location.X, e.Location.Y);
-      chart1.Series[1] = atts;
-      Update();
-      Thread.Sleep(100);
-
-      for(int i = 0; i < enemys.Count; ++i)
+      try
       {
-        if (enemys[i].x < chart1.Series[1].Points[0].XValue + 10 && enemys[i].x > chart1.Series[1].Points[0].XValue - 10)
+        if (attackTime <= 0)
         {
-          if (enemys[i].y < chart1.Series[1].Points[0].YValues[0] + 10 && enemys[i].y > chart1.Series[1].Points[0].YValues[0] - 10)
+          attackTime = player.attackColdown;
+          Series atts = player.Attack(e.Location.X, e.Location.Y);
+          chart1.Series[1] = atts;
+          Update();
+          Thread.Sleep(500);
+
+          Series s = new Series();
+
+          for (int i = 0; i < enemys.Count; ++i)
           {
-            enemys[i].HP -= player.dmg;
-            if (enemys[i].HP <= 0)
+            for (int PointIndex = 0; PointIndex < chart1.Series[1].Points.Count; ++PointIndex)
             {
-              enemys.Remove(enemys[i]);
-              ++Kills;
-              label7.Text = Kills.ToString();
-              UpdateExpBar();
+              s.Points.AddXY(chart1.Series[1].Points[PointIndex].XValue + player.AttackRange, chart1.Series[1].Points[PointIndex].YValues[0] + player.AttackRange);
+
+              if (enemys[i].x < chart1.Series[1].Points[PointIndex].XValue + player.AttackRange && enemys[i].x > chart1.Series[1].Points[PointIndex].XValue - player.AttackRange)
+              {
+                if (enemys[i].y < chart1.Series[1].Points[PointIndex].YValues[0] + player.AttackRange && enemys[i].y > chart1.Series[1].Points[PointIndex].YValues[0] - player.AttackRange)
+                {
+                  enemys[i].HP -= player.dmg;
+                  if (enemys[i].HP <= 0)
+                  {
+                    enemys.Remove(enemys[i]);
+                    ++Kills;
+                    label7.Text = Kills.ToString();
+                    UpdateExpBar();
+                  }
+                }
+              }
             }
           }
+          chart1.Series[1].Points.Clear();
+          chart1.Series.Add(s);
         }
       }
-      chart1.Series[1].Points.Clear();
+      catch
+      {
+        chart1.Series[1].Points.Clear();
+      }
     }
 
     private void timer1_Tick(object sender, EventArgs e)
@@ -197,6 +238,10 @@ namespace Game
 
     private void timer2_Tick(object sender, EventArgs e)
     {
+      if(attackTime > 0)
+      {
+        attackTime -= 2;
+      }
       Series playerSeries = chart1.Series[0];
       Series attackSeries = chart1.Series[1];
       chart1.Series.Clear();
@@ -207,9 +252,8 @@ namespace Game
         enemys[i].UpdatePlaerLocation(player.x, player.y);
         if (!enemys[i].UpdateSeries())
         {
-          enemys.Remove(enemys[i]);
-          
           UpdateHPBar(-enemys[i].dmg);
+          enemys.Remove(enemys[i]);       
         }
         else
         {
